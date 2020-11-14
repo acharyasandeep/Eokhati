@@ -1,46 +1,53 @@
-# Getting Started with Create React App
+# Awesome authentication project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The project has some setup but still requires some efforts to make it awesome. Therefore, we need someone to help us to make it production ready.
 
-## Available Scripts
+Note: This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-In the project directory, you can run:
+## Returning your solution
 
-### `yarn start`
+- Make a copy of this repository in your github/bitbucket/gitlab account.
+- Make changes, commit them, and push them into your repository.
+- Share us the url of your source code and deployed url link after completion.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Prerequisite
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- To help you, all the necessary packages are already specified in the package.json
+- Run app locally in development mode using `yarn && yarn start`.
+- Launch the test runner in the interactive watch mode using `yarn test`.
+- Build the app for production to the build folder using `yarn build`.
 
-### `yarn test`
+## Exercises
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Attempting all the questions is not a must however, your efforts will be rewarded. Note:- Exercise 1, 2 and 3 are mandatory.
 
-### `yarn build`
+Hints: Use material design for the [ui](https://material-ui.com/) and feel free to use your own ideas for the design.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### [1] Create register form for user account creation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- The form should include Email, password and confirm password fields.
+- Include validations for the fields, for example email (must be a valid email) and, password (must be at least 8 characters long and include at least a number and an alphabet) and also match with confirm password field.
+- Show success message on registration success and navigate user to login page
+- You can use browser local storage to persist the users account information.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### [2] Build login form so that user can login using the credentials from exercise [1].
 
-### `yarn eject`
+- Add email and password field in the login form with field validations.
+- On successful login the user will be greeted with welcome message and navigated to the authenticated page.
+- Keep in mind, the authenticated page is not accessible if the user is not logged in.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### [3] Deploy to netlify
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Deploy your app to netlify/heroku
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### [4] Testing
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Write unit test for the app. (tips: [testing-library](https://testing-library.com/))
 
-## Learn More
+### [5] Documentation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Remember to update the README
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### [6] Docker
+
+- Make the app run in the docker
