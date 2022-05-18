@@ -1,8 +1,12 @@
 import { Box, Button, Container, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import bcrypt from 'bcryptjs'
+import { useNavigate } from 'react-router-dom'
 
 const SignUpForm = () => {
+
+    const navigate = useNavigate()
 
     const initialFormValues = { email: '', password: '', confirmPassword: '' }
     const [formValues, setFormValues] = useState(initialFormValues)
@@ -42,6 +46,26 @@ const SignUpForm = () => {
 
     }
 
+    const saveToLocalStorage = async (values) => {
+        let allUsers = JSON.parse(localStorage.getItem('allUsers')) || []
+
+        const hashedPassword = await bcrypt.hash(values.password, 10)
+        const userEntry = {
+            email: values.email,
+            password: hashedPassword
+        }
+        const foundUser = allUsers.find((user) => user.email === values.email)
+        if (!foundUser) {
+            allUsers.push(userEntry)
+            localStorage.setItem('allUsers', JSON.stringify(allUsers))
+            toast.success('Registration Successfull')
+            navigate('/signin')
+        }
+        else {
+            toast.error('Your email is already registered')
+        }
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
         setFormErrors(validate(formValues))
@@ -50,7 +74,8 @@ const SignUpForm = () => {
 
     useEffect(() => {
         if (Object.keys(formErrors).length === 0 && isSubmitted) {
-            toast.success('Registration Successfull')
+
+            saveToLocalStorage(formValues)
             console.log(formValues)
         }
     }, [formErrors])

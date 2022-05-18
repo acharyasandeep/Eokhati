@@ -6,10 +6,17 @@ import {
   TextField,
   Typography
 } from '@mui/material'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import toast from 'react-hot-toast'
+import bcrypt from 'bcryptjs'
+import { UserContext } from '../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 const SignInForm = () => {
+  const navigate = useNavigate()
+
+  const { setUserData } = useContext(UserContext)
+
   const initialFormValues = { email: '', password: '' }
 
   const [formErrors, setFormErrors] = useState({})
@@ -44,10 +51,30 @@ const SignInForm = () => {
     setIsSubmitted(true)
   }
 
+  const signUserIn = async (values) => {
+    let allUsers = JSON.parse(localStorage.getItem('allUsers')) || []
+    const foundUser = allUsers.find((user) => user.email === values.email)
+    if (foundUser) {
+      const isPasswordMatched = await bcrypt.compare(values.password, foundUser.password)
+      if (isPasswordMatched) {
+        toast.success(`User Login Successful`)
+        setUserData(foundUser)
+        localStorage.setItem('userData', JSON.stringify(foundUser))
+        navigate('/account')
+      }
+      else {
+        toast.error('Incorrect password, Please try again')
+      }
+    }
+    else {
+      toast.error('Account not found, Please register first')
+    }
+
+  }
+
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmitted) {
-      toast.success(`User Login Successful`)
-      console.log(formValues)
+      signUserIn(formValues)
     }
   }, [formErrors])
 
