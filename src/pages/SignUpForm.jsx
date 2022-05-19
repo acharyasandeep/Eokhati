@@ -74,7 +74,6 @@ const SignUpForm = () => {
 
     useEffect(() => {
         if (Object.keys(formErrors).length === 0 && isSubmitted) {
-
             saveToLocalStorage(formValues)
             console.log(formValues)
         }

@@ -36,7 +36,7 @@ const Header = () => {
                 <Toolbar >
                     <Avatar sx={{ ml: '50px' }} alt="logo" src={logo} />
                     <Typography variant="h6" component={RouterLink} to='/' sx={{ color: 'white', textDecoration: 'none', flexGrow: 1, pl: '10px' }}>
-                        Okhati
+                        Okhati Solutions
                     </Typography>
 
                     {userData ?

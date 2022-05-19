@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom'
 const SignInForm = () => {
   const navigate = useNavigate()
 
-  const { setUserData } = useContext(UserContext)
+  const { userData, setUserData } = useContext(UserContext)
 
   const initialFormValues = { email: '', password: '' }
 
@@ -77,6 +77,12 @@ const SignInForm = () => {
       signUserIn(formValues)
     }
   }, [formErrors])
+
+  useEffect(() => {
+    if (userData) {
+      navigate('/')
+    }
+  }, [userData])
 
   return (
     <>
